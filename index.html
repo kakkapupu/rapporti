@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modulo Rapporto</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        text-transform: capitalize;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #060608; /* Dark background */
+        color: #f0f0f0; /* Light text color */
+        padding: 20px;
+      }
+
+      .input-container {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+      }
+
+      .input-container label {
+        margin-bottom: 5px;
+        color: #b11b1b; /* Red color for labels */
+        font-weight: bold; /* Bold labels */
+      }
+
+      .input-container span {
+        display: flex;
+        align-items: center; /* Align items vertically centered */
+      }
+      .input-container span input:disabled {
+        background-color: #060608; /* Colore scuro per input disabilitato */
+        color: #a0a0a0; /* Colore grigio per il testo disabilitato */
+        opacity: 0.6; /* Opacità per renderlo meno visibile */
+        cursor: not-allowed; /* Indicatore visivo che non è cliccabile */
+        border: 1px solid #7a7a7a; /* Bordo grigio per evidenziare che è disabilitato */
+      }
+      .input-container span input,
+      .input-container span select,
+      .input-container span textarea {
+        width: 100%;
+        padding: 10px;
+        background-color: #060608; /* Dark input background */
+        border: 1px solid #b11b1b; /* Red border */
+        border-radius: 5px;
+        outline: none;
+        color: #f0f0f0; /* Light text color */
+      }
+
+      .input-container span input[type="checkbox"] {
+        width: 25px; /* Width of checkbox */
+        height: 25px; /* Height of checkbox */
+        margin-right: 10px; /* Space between checkbox and label */
+        cursor: pointer; /* Pointer cursor for checkbox */
+      }
+
+      .input-container span input:disabled {
+        background-color: #060608; /* Darker background for disabled input */
+        color: #a0a0a0; /* Gray color for disabled text */
+        opacity: 0.6; /* Make it less visible */
+        cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+      }
+
+      .input-container span input::placeholder {
+        color: rgba(240, 240, 240, 0.5);
+      }
+
+      .input-container span textarea {
+        height: 100px;
+      }
+
+      .buttonBox {
+        margin-top: 20px;
+      }
+      #luogoContainer {
+        display: none;
+      }
+      .buttonBox button {
+        width: 350px;
+        padding: 10px;
+        border: 1px solid #b11b1b; /* Red border */
+        background-color: #060608; /* Dark background */
+        border-radius: 5px;
+        outline: none;
+        color: #b11b1b; /* Red text color */
+        font-size: 1em;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+
+      .buttonBox button:hover {
+        color: #2b2b3d; /* Dark text color on hover */
+        background-color: #b11b1b; /* Red background on hover */
+        border-radius: 5px;
+      }
+
+      #outputRapporto {
+        margin-top: 30px;
+        color: #b11b1b; /* Red color for output text */
+        font-weight: bolder;
+        text-align: center;
+      }
+
+      /*diocane*/
+      .input-container input[type="checkbox"] {
+        text-align: center;
+        transform: scale(2); /* Rende il checkbox più grande */
+        margin-right: 20px; /* Spazio tra il checkbox e l'etichetta */
+        margin-left: 22%;
+        margin-top: 20px;
+        cursor: pointer; /* Mostra il cursore a forma di mano */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="input-container">
+      <label for="tipoRapporto">Tipo di Rapporto:</label>
+      <span>
+        <select id="tipoRapporto" name="tipoRapporto">
+          <option value="salvataggio">Salvataggio</option>
+          <option value="incendio">Incendio</option>
+          <option value="suicidio">Suicidio</option>
+        </select>
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="aziendaPubblica">
+        <input type="checkbox" id="aziendaPubblica" name="aziendaPubblica" />
+        <b>Azienda Pubblica?</b>
+      </label>
+    </div>
+
+    <div class="input-container" id="luogoContainer">
+      <label for="luogo">Luogo:</label>
+      <span>
+        <input type="text" id="luogo" name="luogo" disabled />
+      </span>
+    </div>
+
+    <div class="coordinate-container" style="display: block">
+      <div class="input-container">
+        <label for="coordinataX">Coordinata X:</label>
+        <span>
+          <input type="number" id="coordinataX" name="coordinataX" />
+        </span>
+      </div>
+
+      <div class="input-container">
+        <label for="coordinataY">Coordinata Y:</label>
+        <span>
+          <input type="number" id="coordinataY" name="coordinataY" />
+        </span>
+      </div>
+
+      <div class="input-container">
+        <label for="coordinataZ">Coordinata Z:</label>
+        <span>
+          <input type="number" id="coordinataZ" name="coordinataZ" />
+        </span>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="segnalatore">Segnalatore:</label>
+      <span>
+        <input type="text" id="segnalatore" name="segnalatore" />
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="vittima">Vittima:</label>
+      <span>
+        <input type="text" id="vittima" name="vittima" />
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="data">Data:</label>
+      <span>
+        <input type="text" id="data" name="data" />
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="oraInizio">Ora Inizio:</label>
+      <span>
+        <input type="text" id="oraInizio" name="oraInizio" />
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="oraFine">Ora Fine:</label>
+      <span>
+        <input type="text" id="oraFine" name="oraFine" />
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="vdf">VDF:</label>
+      <span>
+        <textarea id="vdf" name="vdf" rows="4" cols="50"></textarea>
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="paramedici">Paramedici:</label>
+      <span>
+        <textarea
+          id="paramedici"
+          name="paramedici"
+          rows="4"
+          cols="50"
+        ></textarea>
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="feriti">Feriti:</label>
+      <span>
+        <textarea id="feriti" name="feriti" rows="4" cols="50"></textarea>
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="morti">Morti:</label>
+      <span>
+        <textarea id="morti" name="morti" rows="4" cols="50"></textarea>
+      </span>
+    </div>
+
+    <div class="input-container">
+      <label for="riassunto">Riassunto:</label>
+      <span>
+        <textarea id="riassunto" name="riassunto" rows="4" cols="50"></textarea>
+      </span>
+    </div>
+
+    <div class="buttonBox">
+      <button id="rapportoButton">Rapporto</button>
+    </div>
+
+    <div
+      id="outputRapporto"
+      style="white-space: pre-wrap; margin-top: 20px"
+    ></div>
+
+    <script>
+      document
+        .getElementById("aziendaPubblica")
+        .addEventListener("change", function () {
+          const isChecked = this.checked;
+          const luogoContainer = document.getElementById("luogoContainer");
+          const coordinateContainer = document.querySelector(
+            ".coordinate-container"
+          );
+
+          luogoContainer.style.display = isChecked ? "block" : "none";
+          document.getElementById("luogo").disabled = !isChecked;
+          coordinateContainer.style.display = isChecked ? "none" : "block";
+
+          // Reset the values when toggling the checkbox
+          if (isChecked) {
+            document.getElementById("luogo").value = ""; // Clear the luogo input
+          } else {
+            document.getElementById("coordinataX").value = ""; // Clear coordinate inputs
+            document.getElementById("coordinataY").value = "";
+            document.getElementById("coordinataZ").value = "";
+          }
+        });
+
+      function determinaZona(x, z) {
+        let absX = Math.abs(x);
+        let absZ = Math.abs(z);
+        let zonaX = "";
+        let zonaZ = "";
+
+        // Moltiplica per 2 il valore assoluto più piccolo
+        if (absX < absZ) {
+          absX = absX * 2; // Moltiplica X per 2
+        } else {
+          absZ = absZ * 2; // Moltiplica Z per 2
+        }
+
+        // Se i valori si pareggiano dopo la moltiplicazione, considera entrambi
+        if (absX === absZ) {
+          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+        } else if (absX > absZ) {
+          // Se X è maggiore dopo la moltiplicazione, considera solo X
+          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+        } else {
+          // Se Z è maggiore dopo la moltiplicazione, considera solo Z
+          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+        }
+
+        // Restituisci la zona corretta
+        if (zonaX && zonaZ) {
+          return `${zonaX} e ${zonaZ}`;
+        } else if (zonaX) {
+          return `${zonaX}`;
+        } else if (zonaZ) {
+          return `${zonaZ}`;
+        } else {
+          return "";
+        }
+      }
+
+      function rapporto() {
+        const tipoRapporto = document.getElementById("tipoRapporto").value;
+        const isAziendaPubblica =
+          document.getElementById("aziendaPubblica").checked;
+        const luogo = document.getElementById("luogo").value || "/";
+        const coordinataX =
+          parseFloat(document.getElementById("coordinataX").value) || "/"; // Use parseFloat to convert to number
+        const coordinataY =
+          parseFloat(document.getElementById("coordinataY").value) || "/";
+        const coordinataZ =
+          parseFloat(document.getElementById("coordinataZ").value) || "/";
+        const segnalatore = document.getElementById("segnalatore").value || "/";
+        const vittima = document.getElementById("vittima").value || "/";
+        const data = document.getElementById("data").value || "/";
+        const oraInizio = document.getElementById("oraInizio").value || "/";
+        const oraFine = document.getElementById("oraFine").value || "/";
+        const vdf = document.getElementById("vdf").value || "/";
+        const paramedici = document.getElementById("paramedici").value || "/";
+        const feriti = document.getElementById("feriti").value || "/";
+        const morti = document.getElementById("morti").value || "/";
+        const riassunto = document.getElementById("riassunto").value || "/";
+
+        let zonaOutput = "";
+        if (!isAziendaPubblica) {
+          zonaOutput = determinaZona(coordinataX, coordinataZ); // Pass the coordinates
+          zonaOutput = zonaOutput ? ` - ${zonaOutput}` : ""; // Append if not empty
+        }
+
+        const output = `
+          --------------------
+          Rapporto ${tipoRapporto}
+          --------------------
+          Luogo: ${
+            isAziendaPubblica
+              ? luogo
+              : `${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput}` // Include zona output
+          }
+    
+          Segnalatore: ${segnalatore}
+          Vittima: ${vittima}
+    
+          Data: ${data}
+          Ora: ${oraInizio} - ${oraFine}
+    
+          VDF: ${vdf}
+    
+          Paramedici: ${paramedici}
+    
+          Feriti: ${feriti}
+          Morti: ${morti}
+    
+          Riassunto: ${riassunto}
+        `;
+
+        document.getElementById("outputRapporto").innerText = output;
+      }
+
+      document
+        .getElementById("rapportoButton")
+        .addEventListener("click", rapporto);
+
+      window.onload = function () {
+        const coordinateContainer = document.querySelector(
+          ".coordinate-container"
+        );
+        coordinateContainer.style.display = "block";
+      };
+    </script>
+  </body>
+</html>
