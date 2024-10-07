@@ -261,72 +261,40 @@
     ></div>
 
     <script>
-      document
-        .getElementById("aziendaPubblica")
-        .addEventListener("change", function () {
-          const isChecked = this.checked;
-          const luogoContainer = document.getElementById("luogoContainer");
-          const coordinateContainer = document.querySelector(
-            ".coordinate-container"
-          );
-
-          luogoContainer.style.display = isChecked ? "block" : "none";
-          document.getElementById("luogo").disabled = !isChecked;
-          coordinateContainer.style.display = isChecked ? "none" : "block";
-
-          // Reset the values when toggling the checkbox
-          if (isChecked) {
-            document.getElementById("luogo").value = ""; // Clear the luogo input
-          } else {
-            document.getElementById("coordinataX").value = ""; // Clear coordinate inputs
-            document.getElementById("coordinataY").value = "";
-            document.getElementById("coordinataZ").value = "";
-          }
-        });
-
+      // Funzione aggiornata per determinare la zona
       function determinaZona(x, z) {
-    let absX = Math.abs(x);
-    let absZ = Math.abs(z);
-    let zonaX = "";
-    let zonaZ = "";
+        let absX = Math.abs(x);
+        let absZ = Math.abs(z);
+        let zonaX = "";
+        let zonaZ = "";
 
-    // Moltiplica per 2 il valore assoluto più piccolo
-    if (absX < absZ) {
-        absX = absX * 2; // Moltiplica X per 2
-    } else {
-        absZ = absZ * 2; // Moltiplica Z per 2
-    }
+        if (absX < absZ) {
+          absX = absX * 2; // Moltiplica X per 2
+        } else {
+          absZ = absZ * 2; // Moltiplica Z per 2
+        }
 
-    // Se i valori si pareggiano dopo la moltiplicazione, considera entrambi
-    if (absX === absZ) {
-        zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
-        zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
-    } else if (absX > absZ) {
-        // Se X è maggiore dopo la moltiplicazione, considera solo X
-        zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
-    } else {
-        // Se Z è maggiore dopo la moltiplicazione, considera solo Z
-        zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
-    }
+        if (absX === absZ) {
+          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+        } else if (absX > absZ) {
+          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+        } else {
+          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+        }
 
-    // Combina la zona in un'unica stringa concatenata
-    let zonaFinale = ${zonaZ}${zonaZ && zonaX ? " " : ""}${zonaX};
-    
-    // Restituisci la zona corretta
-    return zonaFinale || "";
-}
+        // Concatenazione corretta della zona
+        let zonaFinale = `${zonaZ}${zonaZ && zonaX ? " " : ""}${zonaX}`;
+        return zonaFinale || "";
+      }
 
       function rapporto() {
         const tipoRapporto = document.getElementById("tipoRapporto").value;
-        const isAziendaPubblica =
-          document.getElementById("aziendaPubblica").checked;
+        const isAziendaPubblica = document.getElementById("aziendaPubblica").checked;
         const luogo = document.getElementById("luogo").value || "/";
-        const coordinataX =
-          parseFloat(document.getElementById("coordinataX").value) || "/"; // Use parseFloat to convert to number
-        const coordinataY =
-          parseFloat(document.getElementById("coordinataY").value) || "/";
-        const coordinataZ =
-          parseFloat(document.getElementById("coordinataZ").value) || "/";
+        const coordinataX = parseFloat(document.getElementById("coordinataX").value) || "/";
+        const coordinataY = parseFloat(document.getElementById("coordinataY").value) || "/";
+        const coordinataZ = parseFloat(document.getElementById("coordinataZ").value) || "/";
         const segnalatore = document.getElementById("segnalatore").value || "/";
         const vittima = document.getElementById("vittima").value || "/";
         const data = document.getElementById("data").value || "/";
@@ -340,34 +308,35 @@
 
         let zonaOutput = "";
         if (!isAziendaPubblica) {
-          zonaOutput = determinaZona(coordinataX, coordinataZ); // Pass the coordinates
-          zonaOutput = zonaOutput ?  - ${zonaOutput} : ""; // Append if not empty
+          zonaOutput = determinaZona(coordinataX, coordinataZ);
+          zonaOutput = zonaOutput ? ` - ${zonaOutput}` : "";
         }
 
-        const output =
-          Rapporto ${tipoRapporto}
-          -------------------
-          Luogo: ${
-            isAziendaPubblica
-              ? luogo
-              : ${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput} // Include zona output
-          }
-      
-          Segnalatore: ${segnalatore}
-          Vittima: ${vittima}
-    
-          Data: ${data}
-          Ora: ${oraInizio} - ${oraFine}
-    
-          VDF: ${vdf}
-    
-          Paramedici: ${paramedici}
-    
-          Feriti: ${feriti}
-          Morti: ${morti}
-    
-          Riassunto: ${riassunto}
-        ;
+        // Output formattato correttamente
+        const output = `
+Rapporto ${tipoRapporto}
+-------------------
+Luogo: ${
+  isAziendaPubblica
+    ? luogo
+    : `${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput}`
+}
+
+Segnalatore: ${segnalatore}
+Vittima: ${vittima}
+
+Data: ${data}
+Ora: ${oraInizio} - ${oraFine}
+
+VDF: ${vdf}
+
+Paramedici: ${paramedici}
+
+Feriti: ${feriti}
+Morti: ${morti}
+
+Riassunto: ${riassunto}
+`;
 
         document.getElementById("outputRapporto").innerText = output;
       }
