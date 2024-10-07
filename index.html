@@ -257,7 +257,7 @@
 
     <div
       id="outputRapporto"
-      style="white-space: pre-wrap; margin-top: 20px"
+      style="white-space: pre-wrap; margin-top: 20px; text-align: left"
     ></div>
 
     <script>
@@ -345,28 +345,28 @@
         }
 
         const output =
-        Rapporto ${tipoRapporto}
-        -------------------
-        Luogo: ${
+          Rapporto ${tipoRapporto}
+          -------------------
+          Luogo: ${
             isAziendaPubblica
               ? luogo
               : ${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput} // Include zona output
           }
       
-        Segnalatore: ${segnalatore}
-        Vittima: ${vittima}
+          Segnalatore: ${segnalatore}
+          Vittima: ${vittima}
     
-        Data: ${data}
-        Ora: ${oraInizio} - ${oraFine}
+          Data: ${data}
+          Ora: ${oraInizio} - ${oraFine}
     
-        VDF: ${vdf}
+          VDF: ${vdf}
     
-        Paramedici: ${paramedici}
+          Paramedici: ${paramedici}
     
-        Feriti: ${feriti}
-        Morti: ${morti}
+          Feriti: ${feriti}
+          Morti: ${morti}
     
-        Riassunto: ${riassunto}
+          Riassunto: ${riassunto}
         ;
 
         document.getElementById("outputRapporto").innerText = output;
