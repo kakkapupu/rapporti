@@ -261,67 +261,109 @@
     ></div>
 
     <script>
-      // Funzione aggiornata per determinare la zona
-      function determinaZona(x, z) {
-        let absX = Math.abs(x);
-        let absZ = Math.abs(z);
-        let zonaX = "";
-        let zonaZ = "";
+  // Funzione per nascondere/mostrare i campi in base alla selezione di "Azienda Pubblica"
+  document
+    .getElementById("aziendaPubblica")
+    .addEventListener("change", function () {
+      const isChecked = this.checked;
+      const luogoContainer = document.getElementById("luogoContainer");
+      const coordinateContainer = document.querySelector(
+        ".coordinate-container"
+      );
 
-        if (absX < absZ) {
-          absX = absX * 2; // Moltiplica X per 2
-        } else {
-          absZ = absZ * 2; // Moltiplica Z per 2
-        }
-
-        if (absX === absZ) {
-          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
-          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
-        } else if (absX > absZ) {
-          zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
-        } else {
-          zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
-        }
-
-        // Concatenazione corretta della zona
-        let zonaFinale = `${zonaZ}${zonaZ && zonaX ? " " : ""}${zonaX}`;
-        return zonaFinale || "";
+      // Mostra il campo "Luogo" e nascondi le coordinate se "Azienda Pubblica" è selezionata
+      if (isChecked) {
+        luogoContainer.style.display = "block";
+        document.getElementById("luogo").disabled = false; // Abilita il campo "Luogo"
+        coordinateContainer.style.display = "none"; // Nasconde le coordinate
+      } else {
+        // Nasconde il campo "Luogo" e mostra le coordinate se "Azienda Pubblica" non è selezionata
+        luogoContainer.style.display = "none";
+        document.getElementById("luogo").disabled = true; // Disabilita il campo "Luogo"
+        coordinateContainer.style.display = "block"; // Mostra le coordinate
       }
 
-      function rapporto() {
-        const tipoRapporto = document.getElementById("tipoRapporto").value;
-        const isAziendaPubblica = document.getElementById("aziendaPubblica").checked;
-        const luogo = document.getElementById("luogo").value || "/";
-        const coordinataX = parseFloat(document.getElementById("coordinataX").value) || "/";
-        const coordinataY = parseFloat(document.getElementById("coordinataY").value) || "/";
-        const coordinataZ = parseFloat(document.getElementById("coordinataZ").value) || "/";
-        const segnalatore = document.getElementById("segnalatore").value || "/";
-        const vittima = document.getElementById("vittima").value || "/";
-        const data = document.getElementById("data").value || "/";
-        const oraInizio = document.getElementById("oraInizio").value || "/";
-        const oraFine = document.getElementById("oraFine").value || "/";
-        const vdf = document.getElementById("vdf").value || "/";
-        const paramedici = document.getElementById("paramedici").value || "/";
-        const feriti = document.getElementById("feriti").value || "/";
-        const morti = document.getElementById("morti").value || "/";
-        const riassunto = document.getElementById("riassunto").value || "/";
+      // Reset dei valori quando si cambia la selezione della checkbox
+      if (isChecked) {
+        document.getElementById("luogo").value = ""; // Resetta il campo "Luogo"
+      } else {
+        // Resetta i campi delle coordinate
+        document.getElementById("coordinataX").value = "";
+        document.getElementById("coordinataY").value = "";
+        document.getElementById("coordinataZ").value = "";
+      }
+    });
 
-        let zonaOutput = "";
-        if (!isAziendaPubblica) {
-          zonaOutput = determinaZona(coordinataX, coordinataZ);
-          zonaOutput = zonaOutput ? ` - ${zonaOutput}` : "";
-        }
+  // Funzione per determinare la zona in base alle coordinate
+  function determinaZona(x, z) {
+    let absX = Math.abs(x);
+    let absZ = Math.abs(z);
+    let zonaX = "";
+    let zonaZ = "";
 
-        // Output formattato correttamente
-        const output = `
-Rapporto ${tipoRapporto}
+    // Moltiplica per 2 il valore assoluto più piccolo
+    if (absX < absZ) {
+      absX = absX * 2; // Moltiplica X per 2
+    } else {
+      absZ = absZ * 2; // Moltiplica Z per 2
+    }
+
+    // Se i valori si pareggiano dopo la moltiplicazione, considera entrambi
+    if (absX === absZ) {
+      zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+      zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+    } else if (absX > absZ) {
+      // Se X è maggiore dopo la moltiplicazione, considera solo X
+      zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+    } else {
+      // Se Z è maggiore dopo la moltiplicazione, considera solo Z
+      zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+    }
+
+    // Combina la zona in un'unica stringa concatenata
+    let zonaFinale = `${zonaZ}${zonaZ && zonaX ? " " : ""}${zonaX}`;
+
+    // Restituisci la zona corretta
+    return zonaFinale || "";
+  }
+
+  // Funzione principale per generare il rapporto
+  function rapporto() {
+    const tipoRapporto = document.getElementById("tipoRapporto").value;
+    const isAziendaPubblica =
+      document.getElementById("aziendaPubblica").checked;
+    const luogo = document.getElementById("luogo").value || "/"; // Prendi il valore di "Luogo" o "/" se vuoto
+    const coordinataX =
+      parseFloat(document.getElementById("coordinataX").value) || "/"; // Usa parseFloat per convertire in numero
+    const coordinataY =
+      parseFloat(document.getElementById("coordinataY").value) || "/";
+    const coordinataZ =
+      parseFloat(document.getElementById("coordinataZ").value) || "/";
+    const segnalatore = document.getElementById("segnalatore").value || "/";
+    const vittima = document.getElementById("vittima").value || "/";
+    const data = document.getElementById("data").value || "/";
+    const oraInizio = document.getElementById("oraInizio").value || "/";
+    const oraFine = document.getElementById("oraFine").value || "/";
+    const vdf = document.getElementById("vdf").value || "/";
+    const paramedici = document.getElementById("paramedici").value || "/";
+    const feriti = document.getElementById("feriti").value || "/";
+    const morti = document.getElementById("morti").value || "/";
+    const riassunto = document.getElementById("riassunto").value || "/";
+
+    let zonaOutput = "";
+    if (!isAziendaPubblica) {
+      zonaOutput = determinaZona(coordinataX, coordinataZ); // Pass the coordinates
+      zonaOutput = zonaOutput ? ` - ${zonaOutput}` : ""; // Append if not empty
+    }
+
+    const output = `Rapporto ${tipoRapporto}
 -------------------
 
 Luogo: ${
-  isAziendaPubblica
-    ? luogo
-    : `${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput}`
-}
+      isAziendaPubblica
+        ? luogo
+        : `${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput}` // Include zona output
+    }
 
 Segnalatore: ${segnalatore}
 Vittima: ${vittima}
@@ -336,22 +378,24 @@ Paramedici: ${paramedici}
 Feriti: ${feriti}
 Morti: ${morti}
 
-Riassunto: ${riassunto}
-`;
+Riassunto: ${riassunto}`;
 
-        document.getElementById("outputRapporto").innerText = output;
-      }
+    document.getElementById("outputRapporto").innerText = output;
+  }
 
-      document
-        .getElementById("rapportoButton")
-        .addEventListener("click", rapporto);
+  // Assegna l'evento di click al pulsante "Rapporto"
+  document
+    .getElementById("rapportoButton")
+    .addEventListener("click", rapporto);
 
-      window.onload = function () {
-        const coordinateContainer = document.querySelector(
-          ".coordinate-container"
-        );
-        coordinateContainer.style.display = "block";
-      };
-    </script>
+  // Imposta il comportamento iniziale per le coordinate al caricamento della pagina
+  window.onload = function () {
+    const coordinateContainer = document.querySelector(
+      ".coordinate-container"
+    );
+    coordinateContainer.style.display = "block";
+  };
+</script>
+
   </body>
 </html>
