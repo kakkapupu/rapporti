@@ -20,8 +20,8 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background-color: #060608;
-        color: #f0f0f0;
+        background-color: #060608; /* Dark background */
+        color: #f0f0f0; /* Light text color */
         padding: 20px;
       }
 
@@ -34,40 +34,45 @@
 
       .input-container label {
         margin-bottom: 5px;
-        color: #b11b1b;
-        font-weight: bold;
+        color: #b11b1b; /* Red color for labels */
+        font-weight: bold; /* Bold labels */
       }
 
       .input-container span {
         display: flex;
-        align-items: center;
+        align-items: center; /* Align items vertically centered */
       }
-
       .input-container span input:disabled {
-        background-color: #060608;
-        color: #a0a0a0;
-        opacity: 0.6;
-        cursor: not-allowed;
-        border: 1px solid #7a7a7a;
+        background-color: #060608; /* Colore scuro per input disabilitato */
+        color: #a0a0a0; /* Colore grigio per il testo disabilitato */
+        opacity: 0.6; /* Opacità per renderlo meno visibile */
+        cursor: not-allowed; /* Indicatore visivo che non è cliccabile */
+        border: 1px solid #7a7a7a; /* Bordo grigio per evidenziare che è disabilitato */
       }
-
       .input-container span input,
       .input-container span select,
       .input-container span textarea {
         width: 100%;
         padding: 10px;
-        background-color: #060608;
-        border: 1px solid #b11b1b;
+        background-color: #060608; /* Dark input background */
+        border: 1px solid #b11b1b; /* Red border */
         border-radius: 5px;
         outline: none;
-        color: #f0f0f0;
+        color: #f0f0f0; /* Light text color */
       }
 
       .input-container span input[type="checkbox"] {
-        width: 25px;
-        height: 25px;
-        margin-right: 10px;
-        cursor: pointer;
+        width: 25px; /* Width of checkbox */
+        height: 25px; /* Height of checkbox */
+        margin-right: 10px; /* Space between checkbox and label */
+        cursor: pointer; /* Pointer cursor for checkbox */
+      }
+
+      .input-container span input:disabled {
+        background-color: #060608; /* Darker background for disabled input */
+        color: #a0a0a0; /* Gray color for disabled text */
+        opacity: 0.6; /* Make it less visible */
+        cursor: not-allowed; /* Change cursor to indicate it's not clickable */
       }
 
       .input-container span input::placeholder {
@@ -81,53 +86,52 @@
       .buttonBox {
         margin-top: 20px;
       }
-
       #luogoContainer {
         display: none;
       }
-
       .buttonBox button {
         width: 350px;
         padding: 10px;
-        border: 1px solid #b11b1b;
-        background-color: #060608;
+        border: 1px solid #b11b1b; /* Red border */
+        background-color: #060608; /* Dark background */
         border-radius: 5px;
         outline: none;
-        color: #b11b1b;
+        color: #b11b1b; /* Red text color */
         font-size: 1em;
         transition: 0.5s;
         cursor: pointer;
       }
 
       .buttonBox button:hover {
-        color: #2b2b3d;
-        background-color: #b11b1b;
+        color: #2b2b3d; /* Dark text color on hover */
+        background-color: #b11b1b; /* Red background on hover */
         border-radius: 5px;
       }
 
       #outputRapporto {
         margin-top: 30px;
-        color: #b11b1b;
+        color: #b11b1b; /* Red color for output text */
         font-weight: bolder;
-        text-align: left;
+        text-align: center;
       }
 
+      /*diocane*/
       .input-container input[type="checkbox"] {
         text-align: center;
-        transform: scale(2);
-        margin-right: 20px;
+        transform: scale(2); /* Rende il checkbox più grande */
+        margin-right: 20px; /* Spazio tra il checkbox e l'etichetta */
         margin-left: 22%;
         margin-top: 20px;
-        cursor: pointer;
+        cursor: pointer; /* Mostra il cursore a forma di mano */
       }
     </style>
   </head>
 
   <body>
-    <div class="Input-container">
-      <label for="TipoRapporto">Tipo di Rapporto:</label>
+    <div class="input-container">
+      <label for="tipoRapporto">Tipo di Rapporto:</label>
       <span>
-        <select id="TipoRapporto" name="TipoRapporto">
+        <select id="tipoRapporto" name="tipoRapporto">
           <option value="salvataggio">Salvataggio</option>
           <option value="incendio">Incendio</option>
           <option value="suicidio">Suicidio</option>
@@ -135,168 +139,249 @@
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="AziendaPubblica">
-        <input type="checkbox" id="AziendaPubblica" name="AziendaPubblica" />
+    <div class="input-container">
+      <label for="aziendaPubblica">
+        <input type="checkbox" id="aziendaPubblica" name="aziendaPubblica" />
         <b>Azienda Pubblica?</b>
       </label>
     </div>
 
-    <div class="Input-container" id="LuogoContainer">
-      <label for="Luogo">Luogo:</label>
+    <div class="input-container" id="luogoContainer">
+      <label for="luogo">Luogo:</label>
       <span>
-        <input type="text" id="Luogo" name="Luogo" disabled />
+        <input type="text" id="luogo" name="luogo" disabled />
       </span>
     </div>
 
-    <div class="Coordinate-container" style="display: block">
-      <div class="Input-container">
-        <label for="CoordinataX">Coordinata X:</label>
+    <div class="coordinate-container" style="display: block">
+      <div class="input-container">
+        <label for="coordinataX">Coordinata X:</label>
         <span>
-          <input type="number" id="CoordinataX" name="CoordinataX" />
+          <input type="number" id="coordinataX" name="coordinataX" />
         </span>
       </div>
 
-      <div class="Input-container">
-        <label for="CoordinataY">Coordinata Y:</label>
+      <div class="input-container">
+        <label for="coordinataY">Coordinata Y:</label>
         <span>
-          <input type="number" id="CoordinataY" name="CoordinataY" />
+          <input type="number" id="coordinataY" name="coordinataY" />
         </span>
       </div>
 
-      <div class="Input-container">
-        <label for="CoordinataZ">Coordinata Z:</label>
+      <div class="input-container">
+        <label for="coordinataZ">Coordinata Z:</label>
         <span>
-          <input type="number" id="CoordinataZ" name="CoordinataZ" />
+          <input type="number" id="coordinataZ" name="coordinataZ" />
         </span>
       </div>
     </div>
 
-    <div class="Input-container">
-      <label for="Segnalatore">Segnalatore:</label>
+    <div class="input-container">
+      <label for="segnalatore">Segnalatore:</label>
       <span>
-        <input type="text" id="Segnalatore" name="Segnalatore" />
+        <input type="text" id="segnalatore" name="segnalatore" />
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Vittima">Vittima:</label>
+    <div class="input-container">
+      <label for="vittima">Vittima:</label>
       <span>
-        <input type="text" id="Vittima" name="Vittima" />
+        <input type="text" id="vittima" name="vittima" />
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Data">Data:</label>
+    <div class="input-container">
+      <label for="data">Data:</label>
       <span>
-        <input type="text" id="Data" name="Data" />
+        <input type="text" id="data" name="data" />
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="OraInizio">Ora Inizio:</label>
+    <div class="input-container">
+      <label for="oraInizio">Ora Inizio:</label>
       <span>
-        <input type="text" id="OraInizio" name="OraInizio" />
+        <input type="text" id="oraInizio" name="oraInizio" />
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="OraFine">Ora Fine:</label>
+    <div class="input-container">
+      <label for="oraFine">Ora Fine:</label>
       <span>
-        <input type="text" id="OraFine" name="OraFine" />
+        <input type="text" id="oraFine" name="oraFine" />
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Vdf">VDF:</label>
+    <div class="input-container">
+      <label for="vdf">VDF:</label>
       <span>
-        <textarea id="Vdf" name="Vdf" rows="4" cols="50"></textarea>
+        <textarea id="vdf" name="vdf" rows="4" cols="50"></textarea>
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Paramedici">Paramedici:</label>
+    <div class="input-container">
+      <label for="paramedici">Paramedici:</label>
       <span>
-        <textarea id="Paramedici" name="Paramedici" rows="4" cols="50"></textarea>
+        <textarea
+          id="paramedici"
+          name="paramedici"
+          rows="4"
+          cols="50"
+        ></textarea>
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Feriti">Feriti:</label>
+    <div class="input-container">
+      <label for="feriti">Feriti:</label>
       <span>
-        <textarea id="Feriti" name="Feriti" rows="4" cols="50"></textarea>
+        <textarea id="feriti" name="feriti" rows="4" cols="50"></textarea>
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Morti">Morti:</label>
+    <div class="input-container">
+      <label for="morti">Morti:</label>
       <span>
-        <textarea id="Morti" name="Morti" rows="4" cols="50"></textarea>
+        <textarea id="morti" name="morti" rows="4" cols="50"></textarea>
       </span>
     </div>
 
-    <div class="Input-container">
-      <label for="Riassunto">Riassunto:</label>
+    <div class="input-container">
+      <label for="riassunto">Riassunto:</label>
       <span>
-        <textarea id="Riassunto" name="Riassunto" rows="4" cols="50"></textarea>
+        <textarea id="riassunto" name="riassunto" rows="4" cols="50"></textarea>
       </span>
     </div>
 
-    <div class="ButtonBox">
-      <button id="RapportoButton">Rapporto</button>
+    <div class="buttonBox">
+      <button id="rapportoButton">Rapporto</button>
     </div>
 
-    <div id="OutputRapporto" style="white-space: pre-wrap; margin-top: 20px"></div>
+    <div
+      id="outputRapporto"
+      style="white-space: pre-wrap; margin-top: 20px"
+    ></div>
 
     <script>
-      document.getElementById("AziendaPubblica").addEventListener("change", function () {
-        const isChecked = this.checked;
-        const luogoContainer = document.getElementById("LuogoContainer");
-        const coordinateContainer = document.querySelector(".Coordinate-container");
+      document
+        .getElementById("aziendaPubblica")
+        .addEventListener("change", function () {
+          const isChecked = this.checked;
+          const luogoContainer = document.getElementById("luogoContainer");
+          const coordinateContainer = document.querySelector(
+            ".coordinate-container"
+          );
 
-        luogoContainer.style.display = isChecked ? "block" : "none";
-        document.getElementById("Luogo").disabled = !isChecked;
-        coordinateContainer.style.display = isChecked ? "none" : "block";
+          luogoContainer.style.display = isChecked ? "block" : "none";
+          document.getElementById("luogo").disabled = !isChecked;
+          coordinateContainer.style.display = isChecked ? "none" : "block";
 
-        if (isChecked) {
-          document.getElementById("Luogo").value = "";
-        } else {
-          document.getElementById("CoordinataX").value = "";
-          document.getElementById("CoordinataY").value = "";
-          document.getElementById("CoordinataZ").value = "";
+          // Reset the values when toggling the checkbox
+          if (isChecked) {
+            document.getElementById("luogo").value = ""; // Clear the luogo input
+          } else {
+            document.getElementById("coordinataX").value = ""; // Clear coordinate inputs
+            document.getElementById("coordinataY").value = "";
+            document.getElementById("coordinataZ").value = "";
+          }
+        });
+
+      function determinaZona(x, z) {
+    let absX = Math.abs(x);
+    let absZ = Math.abs(z);
+    let zonaX = "";
+    let zonaZ = "";
+
+    // Moltiplica per 2 il valore assoluto più piccolo
+    if (absX < absZ) {
+        absX = absX * 2; // Moltiplica X per 2
+    } else {
+        absZ = absZ * 2; // Moltiplica Z per 2
+    }
+
+    // Se i valori si pareggiano dopo la moltiplicazione, considera entrambi
+    if (absX === absZ) {
+        zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+        zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+    } else if (absX > absZ) {
+        // Se X è maggiore dopo la moltiplicazione, considera solo X
+        zonaX = x > 0 ? "Est" : x < 0 ? "Ovest" : "";
+    } else {
+        // Se Z è maggiore dopo la moltiplicazione, considera solo Z
+        zonaZ = z > 0 ? "Sud" : z < 0 ? "Nord" : "";
+    }
+
+    // Combina la zona in un'unica stringa concatenata
+    let zonaFinale = ${zonaZ}${zonaZ && zonaX ? " " : ""}${zonaX};
+    
+    // Restituisci la zona corretta
+    return zonaFinale || "";
+}
+
+      function rapporto() {
+        const tipoRapporto = document.getElementById("tipoRapporto").value;
+        const isAziendaPubblica =
+          document.getElementById("aziendaPubblica").checked;
+        const luogo = document.getElementById("luogo").value || "/";
+        const coordinataX =
+          parseFloat(document.getElementById("coordinataX").value) || "/"; // Use parseFloat to convert to number
+        const coordinataY =
+          parseFloat(document.getElementById("coordinataY").value) || "/";
+        const coordinataZ =
+          parseFloat(document.getElementById("coordinataZ").value) || "/";
+        const segnalatore = document.getElementById("segnalatore").value || "/";
+        const vittima = document.getElementById("vittima").value || "/";
+        const data = document.getElementById("data").value || "/";
+        const oraInizio = document.getElementById("oraInizio").value || "/";
+        const oraFine = document.getElementById("oraFine").value || "/";
+        const vdf = document.getElementById("vdf").value || "/";
+        const paramedici = document.getElementById("paramedici").value || "/";
+        const feriti = document.getElementById("feriti").value || "/";
+        const morti = document.getElementById("morti").value || "/";
+        const riassunto = document.getElementById("riassunto").value || "/";
+
+        let zonaOutput = "";
+        if (!isAziendaPubblica) {
+          zonaOutput = determinaZona(coordinataX, coordinataZ); // Pass the coordinates
+          zonaOutput = zonaOutput ?  - ${zonaOutput} : ""; // Append if not empty
         }
-      });
 
-      document.getElementById("RapportoButton").addEventListener("click", function () {
-        const tipoRapporto = document.getElementById("TipoRapporto").value;
-        const aziendaPubblica = document.getElementById("AziendaPubblica").checked
-          ? "Azienda Pubblica"
-          : "Privata";
-        const luogo = document.getElementById("Luogo").value;
-        const coordinataX = document.getElementById("CoordinataX").value;
-        const coordinataY = document.getElementById("CoordinataY").value;
-        const coordinataZ = document.getElementById("CoordinataZ").value;
-        const segnalatore = document.getElementById("Segnalatore").value;
-        const vittima = document.getElementById("Vittima").value;
-        const data = document.getElementById("Data").value;
-        const oraInizio = document.getElementById("OraInizio").value;
-        const oraFine = document.getElementById("OraFine").value;
-        const vdf = document.getElementById("Vdf").value;
-        const paramedici = document.getElementById("Paramedici").value;
-        const feriti = document.getElementById("Feriti").value;
-        const morti = document.getElementById("Morti").value;
-        const riassunto = document.getElementById("Riassunto").value;
+        const output =
+        Rapporto ${tipoRapporto}
+        -------------------
+        Luogo: ${
+            isAziendaPubblica
+              ? luogo
+              : ${coordinataX}, ${coordinataY}, ${coordinataZ}${zonaOutput} // Include zona output
+          }
+      
+        Segnalatore: ${segnalatore}
+        Vittima: ${vittima}
+    
+        Data: ${data}
+        Ora: ${oraInizio} - ${oraFine}
+    
+        VDF: ${vdf}
+    
+        Paramedici: ${paramedici}
+    
+        Feriti: ${feriti}
+        Morti: ${morti}
+    
+        Riassunto: ${riassunto}
+        ;
 
-        let report = `Tipo di rapporto: ${tipoRapporto}\nRapporto: ${aziendaPubblica}\nSegnalatore: ${segnalatore}\nVittima: ${vittima}\nData: ${data}\nOra Inizio: ${oraInizio}\nOra Fine: ${oraFine}\nVDF: ${vdf}\nParamedici: ${paramedici}\nFeriti: ${feriti}\nMorti: ${morti}\nRiassunto: ${riassunto}`;
+        document.getElementById("outputRapporto").innerText = output;
+      }
 
-        if (aziendaPubblica === "Azienda Pubblica") {
-          report += `\nLuogo: ${luogo}`;
-        } else {
-          report += `\nCoordinata X: ${coordinataX}\nCoordinata Y: ${coordinataY}\nCoordinata Z: ${coordinataZ}`;
-        }
+      document
+        .getElementById("rapportoButton")
+        .addEventListener("click", rapporto);
 
-        document.getElementById("OutputRapporto").innerText = report;
-      });
+      window.onload = function () {
+        const coordinateContainer = document.querySelector(
+          ".coordinate-container"
+        );
+        coordinateContainer.style.display = "block";
+      };
     </script>
   </body>
 </html>
