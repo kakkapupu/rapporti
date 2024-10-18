@@ -332,23 +332,23 @@
     const tipoRapporto = document.getElementById("tipoRapporto").value;
     const isAziendaPubblica =
       document.getElementById("aziendaPubblica").checked;
-    const luogo = document.getElementById("luogo").value || "/"; // Prendi il valore di "Luogo" o "/" se vuoto
+    const luogo = document.getElementById("luogo").value || "//"; // Prendi il valore di "Luogo" o "/" se vuoto
     const coordinataX =
-      parseFloat(document.getElementById("coordinataX").value) || "/"; // Usa parseFloat per convertire in numero
+      parseFloat(document.getElementById("coordinataX").value) || "//"; // Usa parseFloat per convertire in numero
     const coordinataY =
-      parseFloat(document.getElementById("coordinataY").value) || "/";
+      parseFloat(document.getElementById("coordinataY").value) || "//";
     const coordinataZ =
-      parseFloat(document.getElementById("coordinataZ").value) || "/";
-    const segnalatore = document.getElementById("segnalatore").value || "/";
-    const vittima = document.getElementById("vittima").value || "/";
-    const data = document.getElementById("data").value || "/";
-    const oraInizio = document.getElementById("oraInizio").value || "/";
-    const oraFine = document.getElementById("oraFine").value || "/";
-    const vdf = document.getElementById("vdf").value || "/";
-    const paramedici = document.getElementById("paramedici").value || "/";
-    const feriti = document.getElementById("feriti").value || "/";
-    const morti = document.getElementById("morti").value || "/";
-    const riassunto = document.getElementById("riassunto").value || "/";
+      parseFloat(document.getElementById("coordinataZ").value) || "//";
+    const segnalatore = document.getElementById("segnalatore").value || "//";
+    const vittima = document.getElementById("vittima").value || "//";
+    const data = document.getElementById("data").value || "//";
+    const oraInizio = document.getElementById("oraInizio").value || "//";
+    const oraFine = document.getElementById("oraFine").value || "//";
+    const vdf = document.getElementById("vdf").value || "//";
+    const paramedici = document.getElementById("paramedici").value || "//";
+    const feriti = document.getElementById("feriti").value || "//";
+    const morti = document.getElementById("morti").value || "//";
+    const riassunto = document.getElementById("riassunto").value || "//";
 
     let zonaOutput = "";
     if (!isAziendaPubblica) {
